@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Strona główna</title>
+    <link rel="stylesheet" th:href="style.css">
+</head>
+<body>
+<div>
+    <h2>Witamy na stronie głównej</h2>
+    <p style="margin-top: 20px">Co chciałbyś zrobić:</p>
+    <a href="/list">Wyświetl listę zadań, które są jeszcze do zrobienia</a><br><br>
+    <a href="/archive">Wyświetl zrealizowane zadania (archiwum)</a><br><br>
+    <h2>Dodaj do listy nowe zadanie</h2>
+    <div style="display: block; border: salmon">
+        <form style="display: block" action="/add" method="post" th:object="${task}">
+            <label for="title">Podaj tytuł zadania</label><br>
+            <input id="title" type="text" placeholder="Tytuł" th:field="*{title}"/><br>
+            <label for="category" th:for="category">Wybierz kategorię</label><br>
+            <select id="category" th:field="*{category}">
+                <option th:each="category : ${T(com.example.zadanie25_1.TaskCategory).values()}"
+                        th:text="${category.getPolishDescription()}"
+                        th:value="${category.name()}">
+                </option>
+            </select><br>
+            <label for="description">Opisz zadanie do wykonania</label><br>
+            <textarea rows="5" cols="40" id="description" th:field="*{description}"></textarea><br>
+            <input type="submit" value="Dodaj zadanie!"/>
+        </form>
+    </div>
+</div>
+</body>
+</html>

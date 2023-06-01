@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS tasks(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(150) NOT NULL,
+    description VARCHAR(2000) NOT NULL,
+    category VARCHAR(45) NOT NULL,
+    added_time DATETIME NOT NULL,
+    done BIT(5) NOT NULL);

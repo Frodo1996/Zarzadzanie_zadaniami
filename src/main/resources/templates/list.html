@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista zadań</title>
+    <link rel="stylesheet" th:href="style.css">
+</head>
+<body>
+<object style="font-weight: bolder; font-size: 20px">Filtruj kategoriami:</object>
+<a href="/list">Wszystkie</a>
+<div style="display: inline-block"
+     th:each="category : ${T(com.example.zadanie25_1.TaskCategory).values()}">
+    <a th:href="|/list/?category=${category}|" th:text="${category.getPolishDescription()}">Example</a>
+    <span>  </span>
+</div>
+<h2>Lista zadań do zrobienia:</h2>
+<div th:each="task: ${tasks}">
+<table style="width: 100%">
+    <tr><th th:text="|${task.getId()}. ${task.getTitle()}|">1. Test tytuł</th></tr>
+    <tr><td th:text="|${task.getDescription()}|">Test opis</td></tr>
+    <tr><td th:text="|Kategoria: ${task.getCategory().getPolishDescription()}|">Kategoria: test</td></tr>
+    <tr><td th:text="|${task.getAddedTime().toString().replace('T', ' ')}|">data i godzina test</td></tr>
+</table>
+    <a th:href="|/list/${task.id}/edit|">
+        <button class="task_button"
+                type="submit"
+                th:text="|Edytuj zadanie|">
+        </button>
+    </a>
+    <form th:action="|/done/${task.id}|" method="post">
+        <button class="task_button"
+                type="submit"
+                th:text="|Kliknij, by oznaczyć zadanie numer ${task.getId()} jako skończone|">
+
+        </button>
+    </form>
+    <br>
+</div>
+<a href="/">Powrót do strony głównej</a>
+</body>
+</html>
