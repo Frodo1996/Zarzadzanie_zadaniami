@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Archiwum zadań</title>
+    <link rel="stylesheet" th:href="style.css">
+</head>
+<body>
+<h2>Zadania które zostały już wykonane (archiwum)</h2>
+<p><a href="/">Powrót do strony głównej</a></p>
+<div th:each="task: ${doneTasks}">
+    <table style="width: 100%">
+        <tr><th th:text="|${task.getId()}. ${task.getTitle()}|">1. Test tytuł</th></tr>
+        <tr><td th:text="|${task.getDescription()}|">Test opis</td></tr>
+        <tr><td th:text="|Kategoria: ${task.getCategory().getPolishDescription()}|">Kategoria: test</td></tr>
+        <tr><td th:text="|${task.getAddedTime().toString().replace('T', ' ')}|">data i godzina test</td></tr>
+</table>
+</div>
+</body>
+</html>
